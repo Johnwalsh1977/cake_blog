@@ -30,7 +30,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');
-
+		echo $this->Html->css('bootstrap');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
@@ -39,23 +39,30 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
+			<h2>  Welcome to the CCT Student Forum<h2>
+		
 		</div>
 		<div id="content">
-
+		
+			 <div id="text-align">
+			 
+		        <?php if ($logged_in): ?>
+		            Welcome <?php echo $current_user['username']; ?> would you like to.
+					<?php echo $this->Html->link('LOG-OUT', array('controller'=>'users', 'action'=>'logout')); ?>
+		        <?php else: ?>
+		            <?php echo $this->Html->link('You are logged out', array('controller'=>'users', 'action'=>'login')); ?>
+		        <?php endif; ?>
+		    </div>
+			
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
-		</div>
+		</div
 		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				);
-			?>
+			<div id ="name">
+                  <h4>  John Walsh &copy; CCT CakePhP Website 2014<h4>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	
 </body>
 </html>

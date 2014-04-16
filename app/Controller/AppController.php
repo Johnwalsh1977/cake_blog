@@ -20,7 +20,7 @@
  */
 
 App::uses('Controller', 'Controller');
-App::uses('AppModel', 'Model');
+
 
 
 /**
@@ -34,25 +34,21 @@ App::uses('AppModel', 'Model');
  */
 class AppController extends Controller {
 
-	/*public $components = array(
+	public $components = array(
     'Session',
     'Auth' => array(
-		'loginRedirect' => array(
-			'controller' => 'posts',
-			'action' => 'index',
-            ),
+		'loginRedirect' => array('controller' => 'posts','action' => 'index', ),
 	
-	'logoutRedirect' => array(
-			'controller' => 'pages',
-			'action' => 'display',
-            'home'
-        
-        )
+		'logoutRedirect' => array('controller' => 'users','action' => 'login', ),
+           
+		'authorize' => array('Controller')
     )
 );
 
 	public function beforeFilter() {
-		$this->Auth->allow('index', 'view');
+		$this->Auth->allow('index', 'logout', 'display');
+		$this->set('logged_in', $this->Auth->loggedIn());
+		$this->set('current_user', $this->Auth->user());
 	}
 
 	public function isAuthorized($user) {
@@ -64,27 +60,6 @@ class AppController extends Controller {
     // Default deny
     return false;
 	}
-}*/
-public $components = array(
-    'Session',
-    'Auth' => array(
-        'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-        'logoutRedirect' => array(
-            'controller' => 'pages',
-            'action' => 'display',
-            'home'
-        ),
-        'authorize' => array('Controller') // Added this line
-    )
-);
-
-public function isAuthorized($user) {
-    // Admin can access every action
-    if (isset($user['role']) && $user['role'] === 'admin') {
-        return true;
-    }
-
-    // Default deny
-    return false;
 }
-}
+
+?>

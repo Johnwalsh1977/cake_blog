@@ -51,10 +51,11 @@ h1 {
 	font-size: 100%;
 }
 h2 {
-	background:#fff;
-	color: #e32;
+	text-align: center;
+	background:yellow;
+	color: black;
 	font-family:'Gill Sans','lucida grande', helvetica, arial, sans-serif;
-	font-size: 190%;
+	font-size: 300%;
 }
 h3 {
 	color: #2c6877;
@@ -75,6 +76,7 @@ p {
 /** Layout **/
 #container {
 	text-align: left;
+	color:#BDBDBD;
 }
 
 #header{
@@ -98,7 +100,7 @@ p {
 	text-decoration: underline;
 }
 #content{
-	background: #fff;
+	background: #blue;
 	clear: both;
 	color: #333;
 	padding: 10px 20px 40px 20px;
@@ -106,8 +108,9 @@ p {
 }
 #footer {
 	clear: both;
-	padding: 6px 10px;
+	padding: 12x 25px;
 	text-align: right;
+	background: #336699;
 }
 #header a, #footer a {
 	color: #fff;
@@ -739,4 +742,21 @@ pre {
 /** Elements **/
 #url-rewriting-warning {
 	display:none;
+}
+div#name{
+color: darkblue;
+text-align: center;
+background-color:pink;
+font-size:30;
+}
+
+div#text-align{
+color: green;
+font-size:20px;
+padding:5px;
+text-align:center;
+background-color:pink;
+}
+div#container{
+color:yellow;
 }

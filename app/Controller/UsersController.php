@@ -1,16 +1,54 @@
-// app/Controller/UsersController.php
+
 <?php
 class UsersController extends AppController {
 
+public $helpers = array('Html', 'Form', 'Session');
+	public $components = array('Session');
 
+    public function isAuthorized($user){
+    	if(in_array($this->action, array('add'))){
+    		return true;
+    	}
+    	if(in_array($this->action, array('view', 'edit', 'delete'))){
+    		
+    		$userId = $this->request->params['pass'][0];
+    		if($this->Auth->user('id')=== $userId){
+    			debug($this->Auth->user('role'));
+    			return true;
+    		}
+    		else
+    		{
+    		$this->Session->setFlash(__('Sorry only Admin users may modify , view or delete other users'));	
+    		}
+    	}
+    	return parent::isAuthorized($user);
+    }
 
-   public function beforeFilter() {
-       parent::beforeFilter();
-       $this->Auth->allow('add', 'logout');
-   }
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('add', 'logout','login');
+		
+		
+    }
+    
+
+    
+	public function login() {		
+    	if ($this->request->is('post')) {
+        	if ($this->Auth->login()) {
+            	return $this->redirect($this->Auth->redirectUrl());
+        	}
+        $this->Session->setFlash(__('Invalid username or password, try again'));
+    	}
+	}
+
+	public function logout(){
+		return $this->redirect($this->Auth->logout());
+	}
 
     public function index() {
-        $this->User->recursive = 0;
+    	//debug(AuthComponent::user());
+        $this->User->recursive = 1;
         $this->set('users', $this->paginate());
     }
 
@@ -68,26 +106,6 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('User was not deleted'));
         return $this->redirect(array('action' => 'index'));
     }
-	
-//	public function beforeFilter() {
-//	parent::beforeFilter();
-   //  Allow users to register and logout.
-  //  $this->Auth->allow('add', 'logout');
-//	}
-	
-    public function login() {
-		if ($this->request->is('post')) {
-        if ($this->Auth->login()) {
-            return $this->redirect($this->Auth->redirect());
-        }
-        $this->Session->setFlash(__('Invalid username or password, try again'));
-		}
-	}
-
-	public function logout() {
-		return $this->redirect($this->Auth->logout());
-	}
-
 
 }
 ?>

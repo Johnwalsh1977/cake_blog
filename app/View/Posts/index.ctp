@@ -1,7 +1,13 @@
 <!-- File: /app/View/Posts/index.ctp -->
+<div class="action">
+<h1>USER POSTS</h1>
 
-<h1>Blog posts</h1>
-<p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
+<li><?php echo $this->Html->link( 'CREATE USER',array('controller' => 'users', 'action' => 'add')); ?>
+<li><?php echo $this->Html->link( 'CREATE POST',array('controller' => 'posts', 'action' => 'add')); ?>
+<li><?php echo $this->Html->link( 'VIEW USERS',array('controller' => 'users', 'action' => 'index')); ?>
+
+
+	</div>
 <table>
     <tr>
         <th>Id</th>
@@ -42,5 +48,11 @@
         </td>
     </tr>
     <?php endforeach; ?>
+	
+	
+
 
 </table>
+
+
+
